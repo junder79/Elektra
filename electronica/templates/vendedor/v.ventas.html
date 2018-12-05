@@ -1,0 +1,46 @@
+{% extends 'aplicacion/base.html' %}
+{% block content %}
+<h1>Ventas</h1>
+<h1>SUMA DE VENTAS : {{suma}}</h1>
+<h1 id="contenido"></h1>
+<a href="{% url 'nueva_venta' %}" class="btn btn-raised btn-warning">Realizar Venta</a>
+<div class="row">
+    
+         {% for ventas in ventas %} 
+          <div class="col-12 col-md-6 col-lg-6">
+          
+       <div class="card" style="margin-top: 20px; background-color: #0277bd; color: white;">
+        <div class="card-body">
+            {% for producto_vendido in ventas.producto_vendido.all %} 
+              <p class="card-text">{{producto_vendido.nombre_productos}}</p>
+            {% endfor %}
+          <!-- <h5 class="card-title">Producto Vendido : {{ventas.producto_vendido}}</h5> -->
+          <h6 class="card-subtitle mb-2 text-white" >Fecha Venta: {{ventas.fecha_venta}}</h6>
+          <p class="card-text">Cantidad : {{ventas.cantidad_venta}}</p>
+          <p class="card-text">Sucursal : {{ventas.sucursal_venta}}</p>
+          <p class="card-text ">Comentario : {{ventas.comentario_venta}}</p>
+            {% for producto_vendido in ventas.producto_vendido.all %} 
+              <p class="card-text">Precio del Producto : {{producto_vendido.precio_productos}}</p>
+            {% endfor %}
+        </div>
+      </div>
+
+      </div>
+
+         {% endfor %}
+</div>
+
+  <script>
+        var contenido = document.querySelector('#contenido')
+        function traerValorDolar() {
+            fetch('https://mindicador.cl/api')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data.dolar.valor)
+                contenido.innerHTML = `
+                <p>Valor del Dolar $:${data.dolar.valor}</p>
+                `
+            })
+        } 
+    </script>
+{% endblock %}

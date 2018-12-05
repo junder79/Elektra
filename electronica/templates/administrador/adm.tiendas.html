@@ -1,0 +1,83 @@
+{% extends 'aplicacion/base.html' %}
+{% block content %}
+
+<div class="row">
+  <div class="col-sm-12 col-md-6">
+    <h1>Tiendas</h1>
+<a  href="{% url 'nueva_tienda' %}" class="btn btn-raised btn-info" ><i class="fas fa-store"></i> Agregar Tiendas</a>
+  </div>
+  <div class="col-sm-12 col-md-6">
+      {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+              <div class="alert alert-dark alert-dismissible fade show right-block" role="alert">
+                <i class="fa fa-exclamation-triangle"></i> {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+              {% endfor %}
+          </div>
+          {% endif %}
+  </div>
+</div>
+<!--   <div class="row">
+    {% for tiendas in tiendas %} 
+    
+    <div class="col s12 m6">
+      <div class="card  pink darken-1 z-depth-3 ">
+        <div class="card-content white-text">
+          <span class="card-title">{{tiendas.nombre_tiendas}}</span>
+          <p>Vendedor Asignado : {{tiendas.encargado}}</p>
+            <p>Productos de la Tienda:</p>
+             {% for producto in tiendas.productos.all %} 
+              <p>{{producto.nombre_productos}}</p>
+            {% endfor %}
+        </div>
+         <div class="card-action ">
+          <a href="#" class="white-text">Ubicacion: {{tiendas.direccion_tiendas}}</a>
+
+        </div>
+      </div>
+    </div>
+ 
+ 
+    {% endfor %}
+  
+  </div> -->
+
+ 
+ <!--    <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{tiendas.nombre_tiendas}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted"> {{tiendas.encargado}}</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div> -->
+  <div class="row">
+
+         {% for tiendas in tiendas %} 
+          <div class="col-12 col-md-6 col-lg-6">
+          
+       <div class="card" style="margin-top: 20px; background-color: #0277bd; color: white;">
+        <div class="card-body">
+          <h5 class="card-title">{{tiendas.nombre_tiendas}}</h5>
+          <h6 class="card-subtitle mb-2 text-white" >Encargado : {{tiendas.encargado}}</h6>
+          <p class="card-text">Ubicacion : {{tiendas.direccion_tiendas}}</p>
+          <p class="card-text">Productos:</p>
+           {% for producto in tiendas.productos.all %} 
+              <p class="card-text">{{producto.nombre_productos}}</p>
+            {% endfor %}
+        </div>
+      </div>
+      </div>
+
+         {% endfor %}
+
+  </div>
+
+{% endblock %}

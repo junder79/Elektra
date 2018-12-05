@@ -1,0 +1,44 @@
+{% extends 'aplicacion/base.html' %}
+{% block content %}
+<h1>Productos de tu Tienda</h1>
+
+
+  <div class="row">
+
+         {% for tiendas in tiendas %} 
+          <div class="col-12 col-md-6 col-lg-6">
+          
+       <div class="card" style="margin-top: 20px; background-color: #b71c1c ; color: black;">
+        <div class="card-body ">
+          <h5 class="card-title text-light">{{tiendas.nombre_tiendas}}</h5>
+          <h6 class="card-subtitle mb-2 text-light">Encargado : {{tiendas.encargado}}</h6>
+          <p class="card-text  text-light">Ubicacion : {{tiendas.direccion_tiendas}}</p>
+        </div>
+      </div>
+      </div>
+
+         {% endfor %}
+  {% for tiendas in tiendas %}  
+         <div class="col-12 col-md-6 col-lg-6">
+
+           <div class="card" style="margin-top: 20px; background-color: #f50057; color: white;">
+  <div class="card-header">
+    Productos Disponibles
+  </div>
+  <ul class="list-group list-group-flush">
+    {% for producto in tiendas.productos.all %} 
+    <li class="list-group-item">{{producto.nombre_productos}}</li>
+          
+     {% endfor %}
+<!--     <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Vestibulum at eros</li> -->
+  </ul>
+</div>
+         </div>
+ {% endfor %}
+  </div>
+        <div class="mt-5"  >
+            
+        </div>
+
+{% endblock %}

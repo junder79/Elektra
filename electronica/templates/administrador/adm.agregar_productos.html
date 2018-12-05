@@ -1,0 +1,13 @@
+{% extends 'aplicacion/base.html' %}
+{% block content %}
+<h1>Agregar Productos</h1>
+<div class="row">
+    <div class="col-12">
+         <form method="POST" class="post-form browser-default " enctype="multipart/form-data" >{% csrf_token %}
+   {{form.as_p}}
+        <!--FALTA AÑADIR LOS PRODUCTOS asociados  DE LA TIENDA-->
+       <button type="submit"  class="btn btn-raised btn-info">Agregar</button>
+    </form>
+    </div>
+</div>
+{% endblock %}

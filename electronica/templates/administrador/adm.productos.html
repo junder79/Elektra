@@ -1,0 +1,33 @@
+{% extends 'aplicacion/base.html' %}
+{% block content %}
+
+<h1>Lista de Productos</h1>
+<a class="btn btn-raised btn-success" href="{% url 'nuevo_producto'%}" ><i class="fas fa-box"></i> Agregar Productos</a>
+
+<p></p>
+  <div class="row">
+
+         {% for productos in productos %} 
+          <div class="col-12 col-md-6 col-lg-6">
+          
+       <div class="card" style="margin-top: 20px; background-color: #ffb300  ; color: white;">
+         {% if productos.imagen_productos %}
+          <img class="card-img-top" src="{{productos.imagen_productos.url}}" alt="Card image cap">
+{% endif %}
+       
+      <div class="card-body">
+        <h5 class="card-title">{{productos.nombre_productos}}</h5>
+        <p class="card-text">{{productos.descripcion_productos}}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Precio : $ {{productos.precio_productos}}</li>
+        <li class="list-group-item">Tipo de Producto : {{productos.tipo_productos}}</li>
+      </ul>
+    </div>
+      </div>
+
+         {% endfor %}
+
+  </div>
+
+{% endblock %}

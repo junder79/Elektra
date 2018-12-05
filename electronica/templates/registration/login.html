@@ -1,0 +1,46 @@
+{% extends 'aplicacion/base.html' %}
+{% block content %}
+
+<div class="container">
+<!-- 	<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="waves-effect waves-light btn" type="submit">Ingresar</button>
+</form> -->
+<h2>Iniciar Sesion</h2>
+      <!--ALERTAS EN CASO DE LA CUENTA NO EXISTA-->
+      {% if form.errors %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>Ups!</strong>  El nombre de usuario que ingresaste no coincide con ninguna cuenta.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endif %}
+   <form method="POST" class="needs-validation" novalidate>
+            {% csrf_token %}
+            <div class="input-group" >
+              <div class="input-group-prepend">
+                  
+                </div>
+                  <input type="text" class="form-control" id="validationCustom01" placeholder="Nombre de Usuario"  name="username"  required>
+                  <div class="valid-feedback" >
+                    Completado
+                  </div>
+            </div>
+            <div class="input-group" >
+                  <div class="input-group-prepend">
+                  
+                </div>
+                  <input type="password" class="form-control" id="validationCustom02" name="password" placeholder="Contraseña"  required>
+                  <div class="valid-feedback" >
+                   Completado
+                  </div>
+            </div>
+            <div class="form-group btn-ingresar" >
+              <a href="{% url 'password_reset' %}" class="btn btn-raised btn-danger">Olvide mi contraseña</a>
+              <input type="submit" value="Ingresar"  class="btn btn-raised btn-info" name="">
+            </div>
+          </form>
+</div>
+{% endblock %}

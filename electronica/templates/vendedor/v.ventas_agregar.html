@@ -1,0 +1,19 @@
+{% extends 'aplicacion/base.html' %}
+{% block content %}
+<h1>Nueva Venta</h1>
+<div class="row">
+    <div class="col-12">
+         <form method="POST" class="post-form browser-default ">{% csrf_token %}
+         	<!--Producto vendido-->
+         	<label>Productos a vender :{{form.producto_vendido}} </label>
+         	<!--Fecha de la venta-->  
+  			<label >Fecha Venta : {{form.fecha_venta}}</label>
+  			<label>Cantidad: {{form.cantidad_venta}}</label>
+  			<label>Sucursal : {{form.sucursal_venta}}</label>
+  			<label>Comentario :{{form.comentario_venta}} </label>
+        <!--FALTA AÑADIR LOS PRODUCTOS asociados  DE LA TIENDA-->
+       <button type="submit"  class="btn btn-raised btn-info">Agregar</button>
+    </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>Electronica</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-material-design.min.css' %}">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+
+
+<!--Bootsrap DateTimePícker-->
+<link href="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/js/bootstrap-datetimepicker.min.js"></script>
+
+
+<script type="text/javascript" src="{% static 'js/bootstrap-material-design.js' %}" ></script>
+<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body onload="traerValorDolar()">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top " style="background-color: #283593;">
+   <a class="navbar-brand" href="#">Electron</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        <!-- Si cualquier tipo de usuario inició sesíon-->
+    {% if user.is_authenticated %}
+        <!--SI EL USUARIO AUTENTIFICADO COMO ADMIN-->
+          {% if user.username == "admin" %}
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'adm.tiendas' %}" ><i class="fas fa-home"></i> Tiendas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'adm.productos' %}"><i class="fas fa-boxes"></i> Productos</a>
+          </li>
+          {% else  %}
+     <!--Si el usuario que entro no es admin:-->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'v.ventas' %}"><i class="fas fa-file-invoice-dollar"></i> Ventas</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="{% url 'v.ventas_productos' %}"><i class="fas fa-boxes"></i> Productos</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+        <a  class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión ({{user.username}})</a>
+    {% else %}
+        <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+
+    {% endif %}
+      </li>
+    </ul>
+
+  </div>
+</nav>
+  <div class="container">
+    {% block content %}
+  {% endblock %}
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker12').datetimepicker({
+
+          format: 'DD/MM/YYYY HH:mm',
+        });
+    });
+</script>
+</body>
+</html>

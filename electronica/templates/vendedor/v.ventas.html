@@ -1,34 +1,84 @@
 {% extends 'aplicacion/base.html' %}
 {% block content %}
 <h1>Ventas</h1>
-<h1>SUMA DE VENTAS : {{suma}}</h1>
+<h1>Total de Dinero vendido : $ {{suma}}</h1>
+<H1>Cantidad de Ventas : {{contar}}</H1>
+
 <h1 id="contenido"></h1>
-<a href="{% url 'nueva_venta' %}" class="btn btn-raised btn-warning">Realizar Venta</a>
-<div class="row">
-    
-         {% for ventas in ventas %} 
-          <div class="col-12 col-md-6 col-lg-6">
-          
-       <div class="card" style="margin-top: 20px; background-color: #0277bd; color: white;">
-        <div class="card-body">
-            {% for producto_vendido in ventas.producto_vendido.all %} 
-              <p class="card-text">{{producto_vendido.nombre_productos}}</p>
-            {% endfor %}
-          <!-- <h5 class="card-title">Producto Vendido : {{ventas.producto_vendido}}</h5> -->
-          <h6 class="card-subtitle mb-2 text-white" >Fecha Venta: {{ventas.fecha_venta}}</h6>
-          <p class="card-text">Cantidad : {{ventas.cantidad_venta}}</p>
-          <p class="card-text">Sucursal : {{ventas.sucursal_venta}}</p>
-          <p class="card-text ">Comentario : {{ventas.comentario_venta}}</p>
-            {% for producto_vendido in ventas.producto_vendido.all %} 
-              <p class="card-text">Precio del Producto : {{producto_vendido.precio_productos}}</p>
-            {% endfor %}
+
+
+<button type="button" class="btn btn-raised btn-warning" data-toggle="modal" data-target="#exampleModal" ><i class="fas fa-cart-plus"></i> Nueva Venta</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nueva Venta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           <form method="POST" class="post-form browser-default" >{% csrf_token %}
+          <!--Producto vendido-->
+          <div class="row">
+            <div class="col-12">
+               <label>Productos a vender :{{form.producto_vendido}} </label>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-12">
+              <label>Cantidad: {{form.cantidad_venta}}</label>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-12">
+              <label>Sucursal : {{form.sucursal_venta}}</label>
+           </div>
+          </div>
+        <div class="row" style="margin-top: 20px;"> 
+          <div class="col-12">
+            <label>Comentario :{{form.comentario_venta}} </label>
+          </div>
         </div>
+        <!--FALTA AÑADIR LOS PRODUCTOS asociados  DE LA TIENDA-->
+       <button type="submit"  class="btn btn-raised btn-info">Agregar</button>
+    </form>
       </div>
-
+      <div class="modal-footer">
+        <button type="button" class="btn btn-raised btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
-
-         {% endfor %}
+    </div>
+  </div>
 </div>
+
+
+<div class="row">
+           
+  <table class="table table-striped">
+    
+  <thead>
+    <tr>
+      <th scope="col">Producto</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Cantidad Vendida</th>
+      <th scope="col">Sucursal</th>
+      <th scope="col">Comentario</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ventas in ventas %} 
+    <tr>
+      <td>{{ventas.producto_vendido}}</td>
+      <td>{{ventas.fecha_venta}}</td>
+      <td>{{ventas.cantidad_venta}}</td>
+      <td>{{ventas.sucursal_venta}}</td>
+      <td class="truncate">{{ventas.comentario_venta}}</td>
+    </tr>
+   {% endfor %} 
+  </tbody>
+   
+</table>
 
   <script>
         var contenido = document.querySelector('#contenido')
@@ -38,7 +88,7 @@
             .then(data => {
                 console.log(data.dolar.valor)
                 contenido.innerHTML = `
-                <p>Valor del Dolar $:${data.dolar.valor}</p>
+                <p>Valor del Dolar : $ ${data.dolar.valor}</p>
                 `
             })
         } 

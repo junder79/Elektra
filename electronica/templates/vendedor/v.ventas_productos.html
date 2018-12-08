@@ -1,6 +1,6 @@
 {% extends 'aplicacion/base.html' %}
 {% block content %}
-<h1>Productos de tu Tienda</h1>
+<h1>Información de la Tienda</h1>
 
 
   <div class="row">
@@ -13,6 +13,7 @@
           <h5 class="card-title text-light">{{tiendas.nombre_tiendas}}</h5>
           <h6 class="card-subtitle mb-2 text-light">Encargado : {{tiendas.encargado}}</h6>
           <p class="card-text  text-light">Ubicacion : {{tiendas.direccion_tiendas}}</p>
+          <p class="card-text  text-light">Sucursal : {{tiendas.comuna_tiendas}}</p>
         </div>
       </div>
       </div>

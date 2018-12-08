@@ -43,8 +43,9 @@ class Tiendas(models.Model):
 		return self.comuna_tiendas
     
 class Venta(models.Model):
-	producto_vendido=models.ManyToManyField(Productos)
-	fecha_venta=models.DateTimeField()
+	
+	producto_vendido=models.ForeignKey(Productos,null=False,blank=False,on_delete=models.CASCADE)
+	fecha_venta=models.DateTimeField(auto_now_add=True)
 	cantidad_venta=models.CharField(max_length=2)
 	sucursal_venta=models.ForeignKey(Tiendas,null=False,blank=False,on_delete=models.CASCADE)
 	comentario_venta=models.CharField(max_length=200)

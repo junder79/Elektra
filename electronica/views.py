@@ -25,11 +25,15 @@ def redirigir(request):
 
     user = request.user
     tiendas=Tiendas.objects.filter()
+    id_usuario_activo = request.user.id
+    suma= list(Venta.objects.filter(sucursal_venta__encargado=id_usuario_activo).aggregate(Sum('producto_vendido__precio_productos')).values())[0]    
+    contar=Venta.objects.filter(sucursal_venta__encargado=id_usuario_activo).count()
+    ventas = Venta.objects.filter(sucursal_venta__encargado=id_usuario_activo)
     if user.has_perm('electronica.admin'):
 
     	return render(request, 'administrador/adm.tiendas.html', {'tiendas': tiendas})
     else:
-        return render(request, 'vendedor/v.ventas.html',{'tiendas': tiendas})   
+        return render(request, 'vendedor/v.ventas.html',{'ventas': ventas , 'suma':suma , 'contar':contar})   
 
 
 #Dos metodos ,el cual redirecciona a la pantalla de inicio depende el usuario
@@ -80,10 +84,32 @@ def nuevo_producto(request):
    return render(request, 'administrador/adm.agregar_productos.html', {'form': form})
 def vendedor_ventas(request):
     #OBJETO PRINCIPAL DE VENTAS 
-    ventas = Venta.objects.filter()
-    suma= Venta.objects.aggregate(Sum('cantidad_venta'))
-    return render(request, 'vendedor/v.ventas.html', {'ventas':ventas , 'suma':suma})    
+    id_usuario_activo = request.user.id
+    suma= list(Venta.objects.filter(sucursal_venta__encargado=id_usuario_activo).aggregate(Sum('producto_vendido__precio_productos')).values())[0]      
+    ventas = Venta.objects.filter(sucursal_venta__encargado=id_usuario_activo)
+    contar=Venta.objects.filter(sucursal_venta__encargado=id_usuario_activo).count()
+    form=VentaForm()
+    suma= Venta.objects.aggregate(Sum('producto_vendido__precio_productos'))
+    return render(request, 'vendedor/v.ventas.html', {'ventas':ventas , 'suma':suma , 'form':form , 'contar':contar})    
 
+
+
+def vendedor_ventas(request):
+   if request.method == "POST":
+       form = VentaForm(request.POST or None  )
+       ventas = Venta.objects.filter()
+       if form.is_valid():
+        
+           venta = form.save(commit=True)
+           venta.save()
+           return redirect('v.ventas')
+   else:
+       form = VentaForm()
+   id_usuario_activo = request.user.id 
+   suma= list(Venta.objects.filter(sucursal_venta__encargado=id_usuario_activo).aggregate(Sum('producto_vendido__precio_productos')).values())[0]    
+   ventas = Venta.objects.filter(sucursal_venta__encargado=id_usuario_activo)
+   contar=Venta.objects.filter(sucursal_venta__encargado=id_usuario_activo).count()
+   return render(request, 'vendedor/v.ventas.html', {'ventas':ventas , 'suma':suma , 'form':form , 'contar':contar})  
 
 #METODO QUE NOS RETORNA LA PLANTILLA DE PRODUCTOS ASOCIADOS DE DICHA TIENDA
 def vendedor_productos_asociados(request):
@@ -96,24 +122,6 @@ def vendedor_productos_asociados(request):
 
 
 
-#METODO PARA REALIZAR UNA VENTA
 
-def nueva_venta(request):
-    form = VentaForm()
-    return render(request, 'vendedor/v.ventas_agregar.html', {'form': form})      
-
-
-
-def nueva_venta(request):
-   if request.method == "POST":
-       form = VentaForm(request.POST or None)
-       if form.is_valid():
-        
-           post = form.save(commit=False)
-           post.save()
-           return redirect('v.ventas')
-   else:
-       form = VentaForm()
-   return render(request, 'vendedor/v.ventas_agregar.html', {'form': form})
 
 

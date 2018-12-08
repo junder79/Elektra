@@ -1,10 +1,11 @@
 from django import forms
 #Importamos el Modelo de Tiendas
 from .models import Tiendas
-
+from django.contrib.auth.models import User
 #Importamos el modelo de Productos
 from .models import Productos
-
+import requests 
+from django.shortcuts import render
 #Modelo de ventas
 
 from .models import Venta 
@@ -26,9 +27,9 @@ class ProductosForm(forms.ModelForm):
 
 
 class VentaForm(forms.ModelForm):
+
 	class Meta:
 		model=Venta
-		fields=('producto_vendido','fecha_venta','cantidad_venta','sucursal_venta','comentario_venta',)
-		widgets = {
-            'fecha_venta': forms.DateInput(attrs={'id': 'datetimepicker12'})
-        }
+		fields=('producto_vendido','cantidad_venta','sucursal_venta','comentario_venta',)
+		
+

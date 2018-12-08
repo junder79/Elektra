@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from electronica import views
-
-
+from django.views.generic import TemplateView
+from django.urls import path, include 
 urlpatterns = [
 	url(r'^$', views.inicio),
 	url('redirigir', views.redirigir, name="redirigir"),
@@ -13,5 +13,11 @@ urlpatterns = [
     #URLS DEL VENDEDOR    	
     url('ventas',views.vendedor_ventas, name="v.ventas" ),	
     url('productitos',views.vendedor_productos_asociados, name="v.ventas_productos" ),	
-    url('addventa', views.nueva_venta, name='nueva_venta'),
+    # url('addventa', views.nueva_venta, name='nueva_venta'),
+          url(r'^sw.js', (TemplateView.as_view(
+        template_name="sw.js",
+        content_type='application/javascript',
+    )), name='sw.js'),
+    
+
 ]

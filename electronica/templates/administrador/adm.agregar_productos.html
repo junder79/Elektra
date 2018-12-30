@@ -1,13 +1,46 @@
 {% extends 'aplicacion/base.html' %}
 {% block content %}
-<h1>Agregar Productos</h1>
+<h1 class="mt-2 animated flipInX">Agregar Productos <a href="{% url 'adm.productos'%}"><i class="fas fa-arrow-left"></i></a></h1>
 <div class="row">
     <div class="col-12">
-         <form method="POST" class="post-form browser-default " enctype="multipart/form-data" >{% csrf_token %}
-   {{form.as_p}}
-        <!--FALTA AÑADIR LOS PRODUCTOS asociados  DE LA TIENDA-->
-       <button type="submit"  class="btn btn-raised btn-info">Agregar</button>
-    </form>
+    	<div class="card">
+    		<div class="card-body">
+    			  <form method="POST" class="post-form browser-default " enctype="multipart/form-data" >{% csrf_token %}
+
+   				<div class="row">
+   					<div class="col-6">
+   						   <label>Imagen Producto :  {{form.imagen_productos}}</label>
+   					</div>
+   					<div class="col-6">
+   							<label>Tipo Producto :  {{form.tipo_productos}}</label>
+   					</div>
+   				</div> 
+   				<div class="row">
+   					<div class="col-6">
+   						   	<div class="input-group mb-3">
+					  			<input type="text" class="form-control" id="validationCustom01" required placeholder="Nombre Producto" aria-label="Username" aria-describedby="basic-addon1" name="nombre_productos">
+							</div>
+   					</div>
+   					<div class="col-6">
+   							<div class="input-group mb-3">
+					  			<input type="text" class="form-control" id="validationCustom01" required placeholder="Precio" aria-label="Username" aria-describedby="basic-addon1" name="precio_productos">
+							</div>
+   					</div>
+   				</div> 
+   				<div class="row">
+   					<div class="col-12">
+   						<div class="input-group mb-3">
+					  			<input type="text" class="form-control" id="validationCustom01" required placeholder="Descripcion" aria-label="Username" aria-describedby="basic-addon1" name="descripcion_productos">
+						</div>
+   					</div>
+   				</div>
+
+   				       <!--FALTA AÑADIR LOS PRODUCTOS asociados  DE LA TIENDA-->
+				       <button type="submit"  class="btn btn-raised btn-info">Agregar</button>
+				    </form>
+    		</div>
+    	</div>
+ 
     </div>
 </div>
 {% endblock %}

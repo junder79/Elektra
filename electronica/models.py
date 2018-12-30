@@ -49,3 +49,9 @@ class Venta(models.Model):
 	cantidad_venta=models.CharField(max_length=2)
 	sucursal_venta=models.ForeignKey(Tiendas,null=False,blank=False,on_delete=models.CASCADE)
 	comentario_venta=models.CharField(max_length=200)
+
+
+class Oferta(models.Model):
+	precio_producto=models.CharField(max_length=200)
+	tienda_oferta=models.ForeignKey(Tiendas,null=False,blank=False,on_delete=models.CASCADE)
+	producto_oferta=models.OneToOneField(Productos,null=False,blank=False,on_delete=models.CASCADE)

@@ -1,24 +1,80 @@
 {% extends 'aplicacion/base.html' %}
 {% block content %}
 
-<h1>Lista de Productos</h1>
-<a class="btn btn-raised btn-success" href="{% url 'nuevo_producto'%}" ><i class="fas fa-box"></i> Agregar Productos</a>
+<h1 class="animated bounceInDown mt-2">Lista de Productos</h1>
+<a class="btn btn-raised btn-danger text-capitalize" href="{% url 'nuevo_producto'%}" ><i class="fas fa-box mr-2"></i>Agregar Productos</a>
+<button type="button" class="btn btn-raised btn-danger text-capitalize" data-toggle="modal" data-target="#exampleModal" ><i class="fas fa-dollar-sign mr-2"></i>Crear Ofertas</button>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nueva Oferta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           <form method="POST" class="post-form browser-default" onsubmit="showNotification()" >{% csrf_token %}
+          <!--Producto vendido-->
+          <div class="row">
+            <div class="col-12">
+               <label>Producto :{{form.producto_oferta}} </label>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-12">
+              <label>Precio Oferta: {{form.precio_producto}}</label>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-12">
+              <label>Sucursal : {{form.tienda_oferta}}</label>
+           </div>
+          </div>
+        <!--FALTA AÑADIR LOS PRODUCTOS asociados  DE LA TIENDA-->
+       <button type="submit"  class="btn btn-raised btn-info">Ofertar</button>
+    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-raised btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <p></p>
-  <div class="row">
+  <div class="col-sm-12 col-md-6">
+      {% if messages %}
+        <div class="messages mt-2">
+            {% for message in messages %}
+            <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+              <div class="alert alert-success" role="alert">
+              <i class="fas fa-clipboard-check mr-2"></i>{{message}}
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+              {% endfor %}
+          </div>
+          {% endif %}
+  </div>
+  <div class="row animated fadeIn">
 
          {% for productos in productos %} 
           <div class="col-12 col-md-6 col-lg-6">
           
-       <div class="card" style="margin-top: 20px; background-color: #ffb300  ; color: white;">
+       <div class="card" style="margin-top: 20px; background-color: #c62828;  color: white;">
          {% if productos.imagen_productos %}
           <img class="card-img-top" src="{{productos.imagen_productos.url}}" alt="Card image cap">
 {% endif %}
        
       <div class="card-body">
-        <h5 class="card-title">{{productos.nombre_productos}}</h5>
-        <p class="card-text">{{productos.descripcion_productos}}</p>
+        <h5 class="card-title">Nombre :{{productos.nombre_productos}}</h5>
+        <p class="card-text">Descripcion :{{productos.descripcion_productos}}</p>
+        <!-- <a href="{% url 'editar_producto' pk=productos.pk %}" class="btn btn-raised btn-success">Generar Oferta</a> -->
       </div>
+      <hr>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Precio : $ {{productos.precio_productos}}</li>
         <li class="list-group-item">Tipo de Producto : {{productos.tipo_productos}}</li>

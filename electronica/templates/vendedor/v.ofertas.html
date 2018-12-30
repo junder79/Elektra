@@ -1,0 +1,28 @@
+{% extends 'aplicacion/base.html' %}
+{% block content %}
+<h1>Ofertas Vigentes</h1>
+  <div class="row">
+
+         {% for ofertas in ofertas %} 
+          <div class="col-12 col-md-6 col-lg-6">
+          
+       <div class="card" style="margin-top: 20px; background: #e53935;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #e35d5b, #e53935);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #e35d5b, #e53935); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ color: black;">
+        <div class="card-body ">
+            {% for producto in ofertas.producto_oferta.all  %}
+             {% if producto.imagen_productos %}
+          <img class="card-img-top" src="{{producto.imagen_productos.url}}" alt="Card image cap">
+            {% endif %}
+            {% endfor %}
+          <h5 class="card-title text-light">Producto : {{ofertas.producto_oferta}}</h5>
+          <h6 class="card-subtitle mb-2 text-light">Sucursal : {{ofertas.tienda_oferta}}</h6>
+          <p class="card-text  text-light">Precio Oferta : <i class="fas fa-dollar-sign"></i> {{ofertas.precio_producto}}</p>
+        </div>
+      </div>
+      </div>
+
+         {% endfor %}
+  </div>
+{% endblock %}

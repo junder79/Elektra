@@ -10,6 +10,8 @@ from django.shortcuts import render
 
 from .models import Venta 
 
+#Modelo de ofertas
+from .models import Oferta
 #Crear el formulario para agregar Tiendas
 
 class TiendasForm(forms.ModelForm):
@@ -33,3 +35,8 @@ class VentaForm(forms.ModelForm):
 		fields=('producto_vendido','cantidad_venta','sucursal_venta','comentario_venta',)
 		
 
+
+class OfertaForm(forms.ModelForm):
+	class Meta:
+		model=Oferta
+		fields=('precio_producto','tienda_oferta','producto_oferta')		

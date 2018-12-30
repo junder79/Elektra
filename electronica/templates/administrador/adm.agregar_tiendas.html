@@ -1,13 +1,96 @@
 {% extends 'aplicacion/base.html' %}
 {% block content %}
-<h1>Agregar Tiendas</h1>
+<div class="row">
+	<div class="col-sm-12 col-md-6">
+		<h1 class="mt-2 animated flipInX">Nueva Tienda <a href="{% url 'adm.tiendas'%}"><i class="fas fa-arrow-left"></i></a></h1>
+	</div>
+	<div class="col-sm-12 col-md-6">
+		 
+      {% if messages %}
+        <div class="messages mt-2">
+            {% for message in messages %}
+            <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+              <div class="alert-warning alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-triangle"></i> {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+              {% endfor %}
+          </div>
+          {% endif %}
+	</div>
+</div>
+
+
 <div class="row">
     <div class="col-12">
-         <form method="POST" class="post-form browser-default ">{% csrf_token %}
-   {{ form.as_p}}
+    
+    <div class="card">
+    	<div class="card-body">
+    		     <form method="POST" class="post-form browser-default ">{% csrf_token %}
+   <!-- {{ form.as_p}} -->
+   				<!-- <label> Nombre Tienda  {{form.nombre_tiendas}}</label> -->
+
+<div class="row">
+	<div class="col-6">
+		<div class="input-group mb-3">
+  			<input type="text" class="form-control" id="validationCustom01" required placeholder="Nombre Tienda" aria-label="Username" aria-describedby="basic-addon1" name="nombre_tiendas">
+		</div>
+	</div>
+<div class="col-6">
+	<div class="input-group mb-3">
+  <input type="text" class="form-control" required placeholder="Direccion Tienda" aria-label="Username" aria-describedby="basic-addon1" name="direccion_tiendas">
+</div>
+</div>
+
+ 
+</div>
+
+
+<div class="row">
+	<div class="col-6">
+		 <div class="input-group mb-3">
+ 		 <input type="text" class="form-control" required placeholder="Ciudad " aria-label="Username" aria-describedby="basic-addon1" name="ciudad_tiendas">
+		</div>
+	</div>
+	<div class="col-6">		
+		 <div class="input-group mb-3">
+		  <input type="text" class="form-control" required placeholder="Comuna" aria-label="Username" aria-describedby="basic-addon1" name="comuna_tiendas">
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-6">	
+	 <div class="input-group mb-3">
+	  <input type="text" class="form-control" required placeholder="Teléfono" aria-label="Username" aria-describedby="basic-addon1" name="telefono_tiendas">
+</div>
+	</div>
+	<div class="col-6">	
+	 <div class="input-group mb-3">
+	  <input type="email" class="form-control" required placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1" name="correo_tiendas">
+	</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-6">
+		<label>Encargado :{{form.encargado}}</label>
+	</div>
+	<div class="col-6">
+		<label>Productos : {{form.productos}}</label>
+	</div>
+</div>
+
+
         <!--FALTA AÑADIR LOS PRODUCTOS asociados  DE LA TIENDA-->
-       <button type="submit"  class="btn btn-raised btn-info">Agregar</button>
+       <button type="submit"  class="btn btn-raised btn-info btn-lg" style="background-color: #004d40 ;"><i class="fas fa-plus-square fa-sm mr-2 "></i>Agregar</button>
     </form>
+
+    	</div>
+    </div>
     </div>
 </div>
 {% endblock %}

@@ -18,11 +18,14 @@ from django.contrib import admin
 from django.urls import path, include 
 from django.conf import settings
 from django.conf.urls.static import static
+from electronica import views
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
 	url(r'', include('electronica.urls')),
 	path('accounts/', include('django.contrib.auth.urls')), # new
-
+    url(r'^auth/', include('social_django.urls', namespace='social')),
+    # url(r'auth/social', views.inicio, name='auth-social'),
+    # url (r'auth-social/' , include('social_django.urls', namespace='social'))
 ]
 
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

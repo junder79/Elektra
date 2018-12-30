@@ -1,0 +1,29 @@
+{% extends 'aplicacion/base.html' %}<!-- templates/signup.html -->
+{% block content %}
+  <h2 class="mt-2 animated flipInX">Registro de Vendedor <a href="{% url 'adm.tiendas'%}"><i class="fas fa-arrow-left"></i></a></h2>
+  <div class="card ">
+  	 <form method="post">
+    {% csrf_token %}
+    <div class="row ml-2 mr-2">
+   					<div class="col-12">
+   						   	<div class="input-group mb-3">
+					  			<input type="text" class="form-control" id="validationCustom01" required placeholder="Nombre Usuario" aria-label="Username" aria-describedby="basic-addon1" name="username">
+							</div>
+   					</div>
+   					<div class="col-12">
+   							<div class="input-group mb-3">
+					  			<input type="password" class="form-control" id="validationCustom01" required placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1" name="password1">
+							</div>
+   					</div>
+   					<div class="col-12">
+   							<div class="input-group mb-3">
+					  			<input type="password" class="form-control" id="validationCustom01" required placeholder="Confirme Contraseña" aria-label="Username" aria-describedby="basic-addon1" name="password2">
+							</div>
+   					</div>
+   				</div> 
+
+    <button type="submit" class=" ml-2 btn btn-raised btn-info text-capitalize">Registrar</button>
+  </form>
+  </div>
+ 
+{% endblock %}

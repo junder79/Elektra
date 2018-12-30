@@ -1,0 +1,29 @@
+body 
+{
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.cajas 
+{
+	font-size: 25px;
+}
+.caja-total 
+{
+	background-color: #4a148c;
+	color: white;
+	height: 90px;
+}
+
+.caja-ventas
+{
+	color: white;
+	background-color: #880e4f;
+	height: 90px;
+}
+
+.caja-dolar 
+{
+	color: white;
+	background-color: #b71c1c;
+	height: 90px;
+}

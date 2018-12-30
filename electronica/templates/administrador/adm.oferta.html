@@ -1,0 +1,22 @@
+{% extends 'aplicacion/base.html' %}
+{% block content %}
+<h1 class="mt-2">Crear Oferta</h1>
+<div class="row">
+	<div class="col-12">
+	<center>
+			<div class="card">
+			<div class="card-body">
+
+							       <form method="POST" class="post-form browser-default " onsubmit="showNotification()">{% csrf_token %}
+   {{ form.as_p}}
+
+        <!--FALTA AÑADIR LOS PRODUCTOS asociados  DE LA TIENDA-->
+       <button type="submit"  class="btn btn-raised btn-info">Agregar</button>
+    </form>
+
+			</div>
+		</div>
+	</center>
+	</div>
+</div>
+{% endblock %}

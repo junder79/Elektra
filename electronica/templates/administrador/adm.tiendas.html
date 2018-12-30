@@ -3,12 +3,13 @@
 
 <div class="row">
   <div class="col-sm-12 col-md-6">
-    <h1>Tiendas</h1>
-<a  href="{% url 'nueva_tienda' %}" class="btn btn-raised btn-info" ><i class="fas fa-store"></i> Agregar Tiendas</a>
+    <h1 class="mt-2 animated bounceInDown">Tiendas</h1>
+<a  href="{% url 'nueva_tienda' %}" class="btn btn-raised btn-info text-capitalize" ><i class="fas fa-store mr-2"></i> Agregar Tiendas</a>
+<a  href="{% url 'signup' %}" class="btn btn-raised btn-info text-capitalize" ><i class="fas fa-user-plus mr-2"></i> Registrar Vendedor</a>
   </div>
   <div class="col-sm-12 col-md-6">
       {% if messages %}
-        <div class="messages">
+        <div class="messages mt-2">
             {% for message in messages %}
             <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>
               <div class="alert alert-dark alert-dismissible fade show right-block" role="alert">
@@ -58,26 +59,33 @@
     <a href="#" class="card-link">Another link</a>
   </div>
 </div> -->
-  <div class="row">
 
-         {% for tiendas in tiendas %} 
-          <div class="col-12 col-md-6 col-lg-6">
-          
-       <div class="card" style="margin-top: 20px; background-color: #0277bd; color: white;">
-        <div class="card-body">
-          <h5 class="card-title">{{tiendas.nombre_tiendas}}</h5>
-          <h6 class="card-subtitle mb-2 text-white" >Encargado : {{tiendas.encargado}}</h6>
-          <p class="card-text">Ubicacion : {{tiendas.direccion_tiendas}}</p>
-          <p class="card-text">Productos:</p>
-           {% for producto in tiendas.productos.all %} 
-              <p class="card-text">{{producto.nombre_productos}}</p>
-            {% endfor %}
-        </div>
-      </div>
-      </div>
+  <div class="row animated fadeIn">
+     {% for tiendas in tiendas %} 
+    <div class="col-12 col-md-6 col-lg-6">
+                 <div class="card" style="margin-top: 20px; background: #1976d2;
+ color: white;">
+  <div class="card-header">
+    ENCARGADO: {{tiendas.encargado}}
+  </div>
+  <ul class="list-group" style="">
+  <a class="list-group-item">
+    <div class="bmd-list-group-col">
+      <p class="list-group-item-heading ">Teléfono : {{tiendas.telefono_tiendas}}</p>
 
-         {% endfor %}
+      <p class="list-group-item-text text-white">Nombre Tienda:{{tiendas.nombre_tiendas}}</p>
+      <p class="list-group-item-text text-white">Ubicacion : {{tiendas.direccion_tiendas}}</p>
+       <p class="list-group-item-text text-white">Sucursal : {{tiendas.comuna_tiendas}}</p>
+       <p class="list-group-item-text text-white">Correo : {{tiendas.correo_tiendas}}</p>
+      <img src="">
 
+    </div>
+  </a> 
+</ul>
+
+</div>
+    </div>
+     {% endfor %}
   </div>
 
 {% endblock %}

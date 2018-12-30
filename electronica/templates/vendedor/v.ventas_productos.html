@@ -8,12 +8,13 @@
          {% for tiendas in tiendas %} 
           <div class="col-12 col-md-6 col-lg-6">
           
-       <div class="card" style="margin-top: 20px; background-color: #b71c1c ; color: black;">
+       <div class="card" style="margin-top: 20px; background-image: linear-gradient(to right bottom, #eb1a1a, #f26300, #f09500, #e4c100, #cfeb12); color: black;">
         <div class="card-body ">
           <h5 class="card-title text-light">{{tiendas.nombre_tiendas}}</h5>
-          <h6 class="card-subtitle mb-2 text-light">Encargado : {{tiendas.encargado}}</h6>
           <p class="card-text  text-light">Ubicacion : {{tiendas.direccion_tiendas}}</p>
           <p class="card-text  text-light">Sucursal : {{tiendas.comuna_tiendas}}</p>
+          <p class="card-text text-light">Teléfono : {{tiendas.telefono_tiendas}}</p>
+          <p class="card-text text-light">Correo : {{tiendas.correo_tiendas}}</p>
         </div>
       </div>
       </div>
@@ -22,22 +23,55 @@
   {% for tiendas in tiendas %}  
          <div class="col-12 col-md-6 col-lg-6">
 
-           <div class="card" style="margin-top: 20px; background-color: #f50057; color: white;">
+           <div class="card" style="margin-top: 20px; background: #4CB8C4;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3CD3AD, #4CB8C4);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3CD3AD, #4CB8C4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ color: white;">
   <div class="card-header">
-    Productos Disponibles
+    VENDEDOR
   </div>
-  <ul class="list-group list-group-flush">
-    {% for producto in tiendas.productos.all %} 
-    <li class="list-group-item">{{producto.nombre_productos}}</li>
-          
-     {% endfor %}
-<!--     <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Vestibulum at eros</li> -->
-  </ul>
+  <ul class="list-group" style="">
+  <a class="list-group-item">
+    <div class="bmd-list-group-col">
+      <p class="list-group-item-heading ">Encargado : {{tiendas.encargado}}</p>
+
+      <p class="list-group-item-text text-white">Correo :{{ user.email }}</p>
+      <p class="list-group-item-text text-white">Último Inicio sesión :{{ user.last_login }}</p>
+      
+      <img src="">
+
+    </div>
+  </a> 
+</ul>
+
 </div>
          </div>
  {% endfor %}
   </div>
+<div class="row mt-4">
+  {% for tiendas in tiendas %}  
+    {% for producto in tiendas.productos.all %} 
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card-deck">
+      
+  <div class="card">
+       {% if producto.imagen_productos %}
+          <img class="card-img-top" src="{{producto.imagen_productos.url}}" alt="Card image cap">
+{% endif %}
+    <div class="card-body">
+      <h5 class="card-title">{{producto.nombre_productos}}</h5>
+      <p class="card-text">Precio : ${{producto.precio_productos}}</p>
+      <p class="card-text">Descripcion :{{producto.descripcion_productos}}</p>
+      <p class="card-text">Tipo Producto:{{producto.tipo_productos}}</p>
+    </div>
+  </div>
+  
+</div>
+  </div>
+    {% endfor %}
+     {% endfor %}
+</div>
+
         <div class="mt-5"  >
             
         </div>

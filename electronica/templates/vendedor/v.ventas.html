@@ -1,13 +1,29 @@
 {% extends 'aplicacion/base.html' %}
 {% block content %}
 <h1>Ventas</h1>
-<h1>Total de Dinero vendido : $ {{suma}}</h1>
-<H1>Cantidad de Ventas : {{contar}}</H1>
+<div class="row ">
+  <div class="col-12 col-sm-12 col-xl-4">
+      <div class="card caja-total rounded">
+    <h1 class="text-center cajas font-weight-light mt-4">Total de Dinero vendido : $ {{suma}}</h1>
+    </div>
+  </div>
+  <div class="col-12 col-sm-12 col-xl-4"> 
+    <div class="card caja-ventas ">
+      <h1 class="text-center cajas mt-4">Cantidad de Ventas : {{contar}}</h1>
+    </div>
+  </div>
+  <div class="col-12 col-sm-12 col-xl-4">
+    <div class="card caja-dolar">
+      <h1 class="text-center cajas mt-4" id="contenido"></h1>
+    </div>   
+  </div>
+</div>
 
-<h1 id="contenido"></h1>
 
 
-<button type="button" class="btn btn-raised btn-warning" data-toggle="modal" data-target="#exampleModal" ><i class="fas fa-cart-plus"></i> Nueva Venta</button>
+
+
+<button type="button" class="btn btn-raised btn-warning mt-2" data-toggle="modal" data-target="#exampleModal" ><i class="fas fa-cart-plus"></i> Nueva Venta</button>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

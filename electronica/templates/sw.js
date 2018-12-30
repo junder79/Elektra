@@ -1,8 +1,12 @@
 ;
 //asignar un nombre y versión al cache
-const CACHE_NAME = 'PWA5',
+const CACHE_NAME = 'ELEKTRAPWA',
   urlsToCache = [
-      
+    './',
+    './tiendas',
+    './productos',
+    './ventas',
+    './productitos',
 
   ]
 
@@ -53,4 +57,24 @@ self.addEventListener('fetch', e => {
         return fetch(e.request)
       })
   )
+})
+
+//Notificaciones PUSH
+
+self.addEventListener('push', e => {
+  console.log('Evento: Push')
+
+  let title = 'Push Notificación Demo',
+    options = {
+      body: 'Click para regresar a la aplicación',
+      icon: './img/icon_192x192.png',
+      vibrate: [100, 50, 100],
+      data: { id: 1 },
+      actions: [
+        { 'action': 'Si', 'title': 'Amo esta aplicación :)', icon: './img/icon_192x192.png' },
+        { 'action': 'No', 'title': 'No me gusta esta aplicación :(', icon: './img/icon_192x192.png' }
+      ]
+    }
+
+    e.waitUntil( self.registration.showNotification(title, options) )
 })
